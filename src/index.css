@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 222 84% 5%;
+  --foreground: 210 40% 98%;
+  --card: 222 84% 5%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222 84% 5%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 262 83% 58%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 217 32% 17%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217 32% 17%;
+  --muted-foreground: 215 20% 65%;
+  --accent: 45 93% 47%;
+  --accent-foreground: 222 84% 5%;
+  --destructive: 0 62% 30%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217 32% 17%;
+  --input: 217 32% 17%;
+  --ring: 262 83% 58%;
+  --radius: 0.5rem;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: Inter, sans-serif;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Animations personnalisées pour le jeu */
+@keyframes pulse-gold {
+  0%, 100% {
+    opacity: 100%;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 80%;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes hero-attack {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes damage-number {
+  0% {
+    opacity: 100%;
+    transform: translateY(0) scale(1);
+  }
+
+  100% {
+    opacity: 0%;
+    transform: translateY(-20px) scale(0.8);
+  }
+}
+
+.pulse-gold {
+  animation: pulse-gold 0.5s ease-in-out;
+}
+
+.hero-attack {
+  animation: hero-attack 0.3s ease-in-out;
+}
+
+.damage-number {
+  animation: damage-number 1s ease-out forwards;
+}
+
+/* Styles pour la grille de jeu */
+.game-grid {
+  background-image: 
+    linear-gradient(rgb(139 92 246 / 10%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(139 92 246 / 10%) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Effets de particules */
+@keyframes particle-float {
+  0% {
+    opacity: 100%;
+    transform: translateY(0) rotate(0deg);
+  }
+
+  100% {
+    opacity: 0%;
+    transform: translateY(-30px) rotate(180deg);
+  }
+}
+
+.particle {
+  animation: particle-float 2s ease-out forwards;
+}
+
+/* Styles pour les barres de progression personnalisées */
+.progress-bar {
+  transition: width 0.3s ease-in-out;
+}
+
+/* Effets de hover pour les boutons */
+.btn-glow:hover {
+  box-shadow: 0 0 20px rgb(139 92 246 / 40%);
+}
+
+/* Styles pour les tooltips de jeu */
+.game-tooltip {
+  background: rgb(15 23 42 / 95%);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgb(139 92 246 / 30%);
+}
+
+/* Animation de placement de héros */
+@keyframes hero-place {
+  0% {
+    opacity: 0%;
+    transform: scale(0.5) rotate(-180deg);
+  }
+
+  50% {
+    opacity: 80%;
+    transform: scale(1.2) rotate(-90deg);
+  }
+
+  100% {
+    opacity: 100%;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.hero-place {
+  animation: hero-place 0.6s ease-out;
+}
+
+/* Styles pour les effets de combat */
+.combat-effect {
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* Responsive design pour mobile */
+@media (width <= 768px) {
+  .game-grid {
+    background-size: 30px 30px;
+  }
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 80%);
+}
